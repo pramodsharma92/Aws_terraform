@@ -55,5 +55,14 @@ pipeline {
                 '''
             }
         }
+        stage('Terraform Destroy') {
+            steps {
+                sh '''
+                    terraform destroy -auto-approve \
+                    -var "aws_access_key=${AWS_CREDENTIALS_USR}" \
+                    -var "aws_secret_key=${AWS_CREDENTIALS_PSW}" 
+                '''
+            }
+        }
     }
 }
