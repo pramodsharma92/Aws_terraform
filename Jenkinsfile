@@ -6,11 +6,11 @@ pipeline {
     }
 
     stages {
-       /* stage('Checkout') {
+       stage('Checkout') {
             steps {
                 git 'https://github.com/pramodsharma92/aws_terraform.git'
             }
-        }*/
+        }
       stage('Terraform Init') {
             steps {
                 sh '''
