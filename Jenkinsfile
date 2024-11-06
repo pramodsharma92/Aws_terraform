@@ -24,7 +24,8 @@ pipeline {
         }
        stage('Checkout') {
             steps {
-                git 'https://github.com/pramodsharma92/aws_terraform.git'
+                //git 'https://github.com/pramodsharma92/aws_terraform.git'
+                git branch: 'main', url: 'https://github.com/pramodsharma92/aws_terraform.git', credentialsId: '9462c79e-ca8d-41d3-83f3-344f62ab9d42'
             }
         }
       stage('Terraform Init') {
