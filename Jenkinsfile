@@ -1,14 +1,25 @@
 pipeline {
     agent any
 
-    environment {
-        withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', 
-                  accessKeyVariable: 'AWS_ACCESS_KEY_ID', 
-                  secretKeyVariable: 'AWS_SECRET_ACCESS_KEY']])
-        //AWS_CREDENTIALS = credentials('67a378a0-0aa9-4569-9dbd-8d97c963bc3e')
-    }
+   /* environment {
+        AWS_CREDENTIALS = credentials('67a378a0-0aa9-4569-9dbd-8d97c963bc3e')
+    }*/
 
     stages {
+        stage('Setup') {
+            steps {
+                script {
+                    withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', 
+                                      accessKeyVariable: 'AWS_ACCESS_KEY_ID', 
+                                      secretKeyVariable: 'AWS_SECRET_ACCESS_KEY']]) {
+                        // Your code that requires AWS credentials goes here
+                        // For example, print the credentials (avoid doing this in production for security reasons)
+                        sh 'echo $AWS_ACCESS_KEY_ID'
+                        sh 'echo $AWS_SECRET_ACCESS_KEY'
+                    }
+                }
+            }
+        }
        stage('Checkout') {
             steps {
                 git 'https://github.com/pramodsharma92/aws_terraform.git'
