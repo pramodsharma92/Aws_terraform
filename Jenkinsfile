@@ -1,9 +1,9 @@
 pipeline {
     agent any
 
-    environment {
+    /*environment {
         AWS_CREDENTIALS = credentials('67a378a0-0aa9-4569-9dbd-8d97c963bc3e')
-    }
+    }*/
 
     stages {
         stage('Setup') {
@@ -11,11 +11,13 @@ pipeline {
                 script {
                     withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', 
                                       accessKeyVariable: 'AWS_ACCESS_KEY_ID', 
-                                      secretKeyVariable: 'AWS_SECRET_ACCESS_KEY']]) {
+                                      secretKeyVariable: 'AWS_SECRET_ACCESS_KEY',
+                                      credentialsId: '67a378a0-0aa9-4569-9dbd-8d97c963bc3e']]) {
                         // Your code that requires AWS credentials goes here
                         // For example, print the credentials (avoid doing this in production for security reasons)
                         sh 'echo $AWS_ACCESS_KEY_ID'
                         sh 'echo $AWS_SECRET_ACCESS_KEY'
+                        sh 'echo "AWS Credentials Loaded Successfully"'
                     }
                 }
             }
