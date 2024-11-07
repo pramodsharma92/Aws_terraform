@@ -32,8 +32,8 @@ pipeline {
             steps {
                 sh '''
                     terraform init 
-                    //-backend-config="access_key=${AWS_CREDENTIALS_USR}" \
-                    //-backend-config="secret_key=${AWS_CREDENTIALS_PSW}"
+                    #-backend-config="access_key=${AWS_CREDENTIALS_USR}" \
+                    #-backend-config="secret_key=${AWS_CREDENTIALS_PSW}"
                 '''
             }
         }
