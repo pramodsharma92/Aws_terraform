@@ -1,3 +1,8 @@
+# Define the backend configuration
+terraform {
+  backend "local" {}
+}
+
 variable "aws_access_key" {
   description = "AWS access key"
   type        = string
