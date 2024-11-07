@@ -40,27 +40,31 @@ pipeline {
         stage('Terraform Plan') {
             steps {
                 sh '''
-                    terraform plan \
-                    -var "aws_access_key=${AWS_CREDENTIALS_USR}" \
-                    -var "aws_secret_key=${AWS_CREDENTIALS_PSW}" 
+                    #terraform plan \
+                    #-var "aws_access_key=${AWS_CREDENTIALS_USR}" \
+                    #-var "aws_secret_key=${AWS_CREDENTIALS_PSW}" 
+                    terraform plan -var "aws_access_key=${AWS_ACCESS_KEY_ID}" -var "aws_secret_key=${AWS_SECRET_ACCESS_KEY}"
+
                 '''
             }
         }
         stage('Terraform Apply') {
             steps {
                 sh '''
-                    terraform apply -auto-approve \
-                    -var "aws_access_key=${AWS_CREDENTIALS_USR}" \
-                    -var "aws_secret_key=${AWS_CREDENTIALS_PSW}" 
+                    #terraform apply -auto-approve \
+                    #-var "aws_access_key=${AWS_CREDENTIALS_USR}" \
+                    #-var "aws_secret_key=${AWS_CREDENTIALS_PSW}" 
+                    terraform apply -auto-approve -var "aws_access_key=${AWS_ACCESS_KEY_ID}" -var "aws_secret_key=${AWS_SECRET_ACCESS_KEY}"
                 '''
             }
         }
         stage('Terraform Destroy') {
             steps {
                 sh '''
-                    terraform destroy -auto-approve \
-                    -var "aws_access_key=${AWS_CREDENTIALS_USR}" \
-                    -var "aws_secret_key=${AWS_CREDENTIALS_PSW}" 
+                    #terraform destroy -auto-approve \
+                    #-var "aws_access_key=${AWS_CREDENTIALS_USR}" \
+                    #-var "aws_secret_key=${AWS_CREDENTIALS_PSW}" 
+                    terraform destroy -auto-approve -var "aws_access_key=${AWS_ACCESS_KEY_ID}" -var "aws_secret_key=${AWS_SECRET_ACCESS_KEY}"
                 '''
             }
         }
