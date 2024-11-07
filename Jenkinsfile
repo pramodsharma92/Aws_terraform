@@ -39,9 +39,11 @@ pipeline {
         }
         stage('Terraform Plan') {
             steps {
-                    withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'aws-credentials-id', usernameVariable: 'AWS_ACCESS_KEY_ID', passwordVariable: 'AWS_SECRET_ACCESS_KEY']]) {
+                    withCredentials([string(credentialsId: '67a378a0-0aa9-4569-9dbd-8d97c963bc3e', variable: 'AWS_ACCESS_KEY_ID'), 
+                    string(credentialsId: '67a378a0-0aa9-4569-9dbd-8d97c963bc3e', variable: 'AWS_SECRET_ACCESS_KEY')]) {
+                    // Terraform commands
                     sh 'terraform plan -var="aws_access_key=${AWS_ACCESS_KEY_ID}" -var="aws_secret_key=${AWS_SECRET_ACCESS_KEY}"'
-                    }
+                   }
                /*sh '''
                     #terraform plan \
                     #-var "aws_access_key=${AWS_CREDENTIALS_USR}" \
